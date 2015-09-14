@@ -12,10 +12,12 @@ io.on('connection', function(socket) {
 	console.log('a user connected' + "\n");
       // update class map based on active user db
       db.getAllActive(function(err, row){
-      	for(var i = 0; i < row.length; i++){
-      		var student = {action: "sign in", id: row[i].id, computer: row[i].computer, info: row[i].firstName + " " + row[i].lastName + "<br>" + row[i].team + "/" + row[i].grade};
-      		socket.emit('update map', student);
-      	}
+      	if(row){
+      	  for(var i = 0; i < row.length; i++){
+      	    var student = {action: "sign in", id: row[i].id, computer: row[i].computer, info: row[i].firstName + " " + row[i].lastName + "<br>" + row[i].team + "/" + row[i].grade};
+      	    socket.emit('update map', student);
+      	  }
+        }
       });
 
 	socket.on('disconnect', function() { console.log('disconnected'); });
@@ -33,28 +35,20 @@ io.on('connection', function(socket) {
 				console.log('check fail: Already signed in.' + "\n");
 			} 
 			else { 
-				db.findStudent(student.id, function(err, row){ 
-					if(row == undefined) { // student already signed in
-						socket.emit('sign in fail', "Student ID not in database.");
-						console.log('check fail: Student ID not in database.' + "\n");
-					} 
-					else {
-						db.signInStudent(row, student.computer);
-						student.info = row.firstName + " " + row.lastName + "<br>" + row.team + "/" + row.grade;
-						socket.emit('sign in success', student);
-						student.action = 'sign in';
-						socket.broadcast.emit('update map', student);
-						console.log('check success');
-						console.log('submitted ' + JSON.stringify(student) + "\n");
-					}
-				});			
-			}
+				db.signInStudent(row, student.computer);
+				student.info = row.firstName + " " + row.lastName + "<br>" + row.team + "/" + row.grade;
+				socket.emit('sign in success', student);
+				student.action = 'sign in';
+				socket.broadcast.emit('update map', student);
+				console.log('check success');
+				console.log('submitted ' + JSON.stringify(student) + "\n");
+			}		
 		});
 	});
 	
 	socket.on('sign out', function(student){
 		// check to make sure student isn't already signed out
-		db.checkActiveComputer(student.computer, function(err, row){
+		db.checkActive(student.id, function(err, row){
 			if(row == undefined) { // student not signed in
 				console.log(err + " " + row);
 				socket.emit('sign out fail', 'student not signed in');
@@ -62,11 +56,11 @@ io.on('connection', function(socket) {
 			}
 			else {
 				// copy data from lab table, record time and destination and remove from lab table
-				db.signOutStudent(row, student.destination, function(err, row){
+				db.signOutStudent(row, function(err, row){
 					var name = row.firstName + " " + row.lastName;
 					console.log('signed out: ' + name + ' at computer #' + student.computer);
     		    	console.log('destination: ' + student.destination + "\n");
-					socket.emit('sign out success', name);
+					socket.emit('sign out success', student);
 					student.action = 'sign out';
 					socket.broadcast.emit('update map', student);
 				});

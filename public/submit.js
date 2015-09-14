@@ -84,5 +84,5 @@ socket.on('sign out success', function(data){
     
 socket.on('sign out fail', function(err){
 	alert('error: ' + err);
-	deselectStudent(document.getElementByClassName('selected'));
+	deselectStudent();
 });

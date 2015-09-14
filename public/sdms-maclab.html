@@ -1,7 +1,11 @@
 <html>
 <head>
+  <script type='text/javascript' src="https://www.google.com/jsapi"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type='text/javascript' src="./query.js"></script>
+  <script type='text/javascript' src="./submit.js"></script>
 </head>
-<body>
+<body id='sdms-maclab'>
   <div id='menu-buttons'>
     <button class='button in inactive' onclick='openIn()'>Sign In</button> 
       <!-- opens menu where student can type their id # 
@@ -16,7 +20,7 @@
   <div class='menu in inactive'>
     Student ID: <input id='sid' type='text'>
     Computer #: <input id='num' type='number' min='1' max='31'>
-    <button class='button in submit' onclick='signIn()'>Submit</button>
+    <button class='button in submit' onclick='getStudent()'>Submit</button>
   </div>
 
   <div class='menu out inactive'>
