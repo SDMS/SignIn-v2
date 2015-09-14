@@ -3,14 +3,26 @@
 </head>
 <body>
   <div id='menu-buttons'>
-    <button class='button in inactive'>Sign In</button> 
+    <button class='button in inactive' onclick='openIn()'>Sign In</button> 
       <!-- opens menu where student can type their id # 
       and input any other information that will be stored. -->
 
-    <button class='button out inactive'>Sign Out</button>
+    <button class='button out inactive' onclick='openOut()'>Sign Out</button>
     <!-- prompts student to click on their name (li element)
     opens menu where student can input any other information 
     that will be stored. -->
+  </div>
+
+  <div class='menu in inactive'>
+    Student ID: <input id='sid' type='text'>
+    Computer #: <input id='num' type='number' min='1' max='31'>
+    <button class='button in submit' onclick='signIn()'>Submit</button>
+  </div>
+
+  <div class='menu out inactive'>
+    Select your name from the list below, then click Submit.
+    <button class='button out submit' onclick='signOut()'>Submit</button>
+
   </div>
 
   <ul id='students'>
