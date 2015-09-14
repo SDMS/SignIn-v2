@@ -1,11 +1,12 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var db = require('./js/db.js');
+var db = require('./db.js');
 
 
-app.use('/', express.static('public'));
+app.use(express.static('public'));
 
 io.on('connection', function(socket) {
 	console.log('a user connected' + "\n");
