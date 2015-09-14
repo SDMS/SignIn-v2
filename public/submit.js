@@ -37,14 +37,10 @@ document.onkeydown = function(e) {
 	}
 }
 
-function signin() {
-	var sid = document.getElementById('sid').value;
-	if(sid.charAt(0) == 'P') sid = sid.substring(1);
+function signin(student) {
 
-	var student = {"id": sid};
 	console.log(JSON.stringify(student));
-	
-	socket.emit('sign in', student); 	// check if student exists, check if student is already signed in
+	socket.emit('sign in', student); 	// check if student is already signed in
 }
 
 function signout(){

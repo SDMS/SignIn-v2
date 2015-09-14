@@ -12,15 +12,28 @@ function handleQueryResponse(response){
 		return;
 	}
 	var data = response.getDataTable();
-    
-	for(var i = 0; i < data.getNumberOfColumns(); i++){
-		console.log(data.getValue(0,i));
+	if(data.getNumberOfRows() > 1) {
+		alert("Please ask a teacher for help.");
+		return;
+	}else if(data.getNumberOfRows() < 1){
+		alert("Did you type your ID in correctly?");
+		return;
 	}
-	console.log(data.getNumberOfRows());
+
+    var student = {
+    	sid: data.getValue(0,0);
+    	firstName: data.getValue(0,1);
+    	lastName: data.getValue(0,2);
+        grade: data.getValue(0,3);
+        team: data.getValue(0,4);
+
+    }
+	signin(student);
 }
 
 function getStudent(id, link){
-  var opts = {sendMethod: 'auto'};
+	if(sid.charAt(0) == 'P') sid = sid.substring(1);
+    var opts = {sendMethod: 'auto'};
 	var query = new google.visualization.Query(link, opts);
 	query.setQuery('select * where A =' + id);
 	query.send(handleQueryResponse);
