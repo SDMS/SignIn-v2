@@ -1,0 +1,7 @@
+{
+  "links": {
+    "sdms": "https://docs.google.com/spreadsheets/d/1NcGy2e_nzsDuX-BkHcw0UlzSTdIkbnn0ONIN6stE9Ag/edit",
+    "whs": "https://docs.google.com/spreadsheets/d/1NcGy2e_nzsDuX-BkHcw0UlzSTdIkbnn0ONIN6stE9Ag/edit"
+  },
+  "rooms":["sdms-maclab", "sdms-lmc", "whs-lmc"]
+}
