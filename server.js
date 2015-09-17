@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var db = require('./db.js');
+var settings = require('./settings.json');
 
 
 app.use(express.static('public'));
@@ -11,7 +12,10 @@ app.use(express.static('public'));
 io.on('connection', function(socket) {
 	console.log('a user connected' + "\n");
       // update class map based on active user db
-      db.getAllActive(function(err, row){
+
+    socket.on('update map', function(room){
+    	console.log('updating map... ' + room);
+      db.getAllActive(room, function(err, row){
       	if(row){
       	  for(var i = 0; i < row.length; i++){
       	    var student = {action: "sign in", id: row[i].id, computer: row[i].computer, info: row[i].firstName + " " + row[i].lastName + "<br>" + row[i].team + "/" + row[i].grade};
@@ -19,8 +23,18 @@ io.on('connection', function(socket) {
       	  }
         }
       });
+  });
 
 	socket.on('disconnect', function() { console.log('disconnected'); });
+
+	socket.on('start query', function(data){
+		// determine link via JSON
+		var room = data.room;
+		room = room.slice(0,room.indexOf("-"));
+		data['link'] = settings["links"][room];
+		console.log(data);
+		socket.emit('do query', data);
+	});
 	
 	socket.on('sign in', function(student){
 		console.log("received data:");
