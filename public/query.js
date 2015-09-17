@@ -21,18 +21,21 @@ function handleQueryResponse(response){
 	}
 
     var student = {
-    	sid: data.getValue(0,0);
-    	firstName: data.getValue(0,1);
-    	lastName: data.getValue(0,2);
-        grade: data.getValue(0,3);
-        team: data.getValue(0,4);
+    	sid: data.getValue(0,0),
+    	firstName: data.getValue(0,1),
+    	lastName: data.getValue(0,2),
+        grade: data.getValue(0,3),
+        team: data.getValue(0,4)
 
     }
-	signin(student);
+    console.log(student);
+	socket.emit('sign in', student);
 }
 
 function getStudent(id, link){
-	if(sid.charAt(0) == 'P') sid = sid.substring(1);
+	if(typeof id == 'string') {
+		if(id.charAt(0) == 'P') id = id.substring(1);
+	}
     var opts = {sendMethod: 'auto'};
 	var query = new google.visualization.Query(link, opts);
 	query.setQuery('select * where A =' + id);

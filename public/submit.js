@@ -37,10 +37,10 @@ document.onkeydown = function(e) {
 	}
 }
 
-function signin(student) {
+function signin() {
 
-	console.log(JSON.stringify(student));
-	socket.emit('sign in', student); 	// check if student is already signed in
+  var data = {room: document.body.id, id: document.getElementById('sid').value}
+  socket.emit('start query', data);
 }
 
 function signout(){
@@ -48,6 +48,10 @@ function signout(){
   var student = {"id": sid};
   socket.emit('sign out', student);
 }
+
+socket.on('do query', function(data){
+  getStudent(data.id, data.link);
+});
 
 socket.on('update map', function(student){
 	if(student.action == "sign in") {
@@ -58,6 +62,8 @@ socket.on('update map', function(student){
 	}
 		
 });
+
+window.onload = function() { socket.emit('update map', document.body.id); }
 
 socket.on('sign in success', function(data){
   console.log('signing in.... ' + JSON.stringify(data));
