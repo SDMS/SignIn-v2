@@ -16,12 +16,10 @@ io.on('connection', function(socket) {
     socket.on('update map', function(room){
     	console.log('updating map... ' + room);
       db.getAllActive(room, function(err, row){
-      	console.log(row);
       	if(row){
       	  for(var i = 0; i < row.length; i++){
       	    var student = {action: "sign in", sid: row[i].sid, computer: row[i].computer, firstName: row[i].firstName, lastName:row[i].lastName, team:row[i].team, grade:row[i].grade};
       	    socket.emit('update map', student);
-      	    console.log(student);
       	  }
         }
       });

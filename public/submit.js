@@ -18,7 +18,6 @@ function removeStudent(data){
 }
 
 function clickStudent(){
-  alert('click!');
   if(selectedStudent == this.id) {
   	deselectStudent(this);
   } else {
