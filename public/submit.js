@@ -57,6 +57,7 @@ function signout(){
   if(selectedStudent != -1) {
     var student = {room: document.body.id, sid: selectedStudent};
     socket.emit('sign out', student);
+    deselectStudent(document.getElementById(selectedStudent));
   } else {
   	alert("Please select your name in the list!");
   }
