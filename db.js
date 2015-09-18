@@ -28,7 +28,7 @@ module.exports.checkActive = function checkActive(room, sid, callback){
 module.exports.signInStudent = function signInStudent(room, student){
 	var date = new Date().toLocaleString();
 	console.log(date);
-	db.run('INSERT INTO ' + room + ' VALUES (?,?,?,?,?,?,?,?)', student.id, student.firstName, student.lastName, student.grade, student.team, date, student.computer, student.fields);
+	db.run('INSERT INTO ' + room + ' VALUES (?,?,?,?,?,?,?,?)', student.sid, student.firstName, student.lastName, student.grade, student.team, date, student.computer, student.fields);
 }
 module.exports.checkActiveComputer = function checkActiveComputer(room, computer, callback){
 	db.get('SELECT * FROM ' + room + ' WHERE computer=?', computer, callback);

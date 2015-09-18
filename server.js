@@ -16,10 +16,12 @@ io.on('connection', function(socket) {
     socket.on('update map', function(room){
     	console.log('updating map... ' + room);
       db.getAllActive(room, function(err, row){
+      	console.log(row);
       	if(row){
       	  for(var i = 0; i < row.length; i++){
-      	    var student = {action: "sign in", id: row[i].id, computer: row[i].computer, info: row[i].firstName + " " + row[i].lastName + "<br>" + row[i].team + "/" + row[i].grade};
+      	    var student = {action: "sign in", id: row[i].sid, computer: row[i].computer, firstName: row[i].firstName, lastName:row[i].lastName, team:row[i].team, grade:row[i].grade};
       	    socket.emit('update map', student);
+      	    console.log(student);
       	  }
         }
       });
@@ -39,7 +41,7 @@ io.on('connection', function(socket) {
 	socket.on('sign in', function(student){
 		console.log("received data:");
 		console.log(student);
-		db.checkActive(student.room, student.id, function(err, row){
+		db.checkActive(student.room, student.sid, function(err, row){
 			if(err != null){
 				console.log(err);
 				return;
@@ -60,7 +62,7 @@ io.on('connection', function(socket) {
 	
 	socket.on('sign out', function(student){
 		// check to make sure student isn't already signed out
-		db.checkActive(student.id, function(err, row){
+		db.checkActive(student.sid, function(err, row){
 			if(row == undefined) { // student not signed in
 				console.log(err + " " + row);
 				socket.emit('sign out fail', 'student not signed in');

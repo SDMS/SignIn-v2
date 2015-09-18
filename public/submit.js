@@ -5,7 +5,7 @@ var selectedStudent = -1;
 function addStudent(data){
   	var list = document.getElementById('students');
 	var student = document.createElement('li');
-	student.appendChild(document.createTextNode('information goes here'));
+	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " " + data.grade + " " + data.team));
 	student.onclick = 'selectStudent(this)';
 	list.appendChild(student);
 }
@@ -44,9 +44,13 @@ function signin() {
 }
 
 function signout(){
-  var sid = document.getElementById(selectedStudent);
-  var student = {"id": sid};
-  socket.emit('sign out', student);
+  if(selectedStudent != -1) {
+    var sid = selectedStudent;
+    var student = {"sid": sid};
+    socket.emit('sign out', student);
+  } else {
+  	alert("Please select your name in the list!");
+  }
 }
 
 socket.on('do query', function(data){
