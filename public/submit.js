@@ -13,7 +13,7 @@ function addStudent(data){
 
 function removeStudent(data){
   var list = document.getElementById('students');
-  var student = document.getElementById(data.id); // maybe change.
+  var student = document.getElementById(data.sid); // maybe change.
   list.removeChild(student);
 }
 
@@ -26,7 +26,9 @@ function clickStudent(){
 }
 
 function selectStudent(element){
-  if(selectedStudent != -1) deselectStudent(selectedStudent);
+  if(selectedStudent != -1) {
+  	deselectStudent(document.getElementById(selectedStudent));
+  }
   element.className = 'selected';
   selectedStudent = element.id;
 }
@@ -53,8 +55,7 @@ function signin() {
 
 function signout(){
   if(selectedStudent != -1) {
-    var sid = selectedStudent;
-    var student = {"sid": sid};
+    var student = {room: document.body.id, sid: selectedStudent};
     socket.emit('sign out', student);
   } else {
   	alert("Please select your name in the list!");
