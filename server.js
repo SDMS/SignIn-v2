@@ -30,7 +30,7 @@ io.on('connection', function(socket) {
 	socket.on('start query', function(data){
 		// determine link via JSON
 		var room = data.room;
-		room = room.slice(0,room.indexOf("-"));
+		room = room.slice(0,room.indexOf("_"));
 		data['link'] = settings["links"][room];
 		console.log(data);
 		socket.emit('do query', data);
@@ -39,7 +39,7 @@ io.on('connection', function(socket) {
 	socket.on('sign in', function(student){
 		console.log("received data:");
 		console.log(student);
-		db.checkActive(student.id, function(err, row){
+		db.checkActive(student.room, student.id, function(err, row){
 			if(err != null){
 				console.log(err);
 				return;
@@ -47,16 +47,14 @@ io.on('connection', function(socket) {
 			if(row != undefined) { // student not in database 
 				socket.emit('sign in fail', "You are already signed in.");
 				console.log('check fail: Already signed in.' + "\n");
-			} 
-			else { 
-				db.signInStudent(row, student.computer);
-				student.info = row.firstName + " " + row.lastName + "<br>" + row.team + "/" + row.grade;
-				socket.emit('sign in success', student);
+			} else { 
+				db.signInStudent(student.room, student);
 				student.action = 'sign in';
+				socket.emit('sign in success', student);
 				socket.broadcast.emit('update map', student);
 				console.log('check success');
 				console.log('submitted ' + JSON.stringify(student) + "\n");
-			}		
+			}
 		});
 	});
 	
@@ -70,10 +68,9 @@ io.on('connection', function(socket) {
 			}
 			else {
 				// copy data from lab table, record time and destination and remove from lab table
-				db.signOutStudent(row, function(err, row){
-					var name = row.firstName + " " + row.lastName;
+				db.signOutStudent(student.room, student, function(err, row){
+					var name = student.firstName + " " + student.lastName;
 					console.log('signed out: ' + name + ' at computer #' + student.computer);
-    		    	console.log('destination: ' + student.destination + "\n");
 					socket.emit('sign out success', student);
 					student.action = 'sign out';
 					socket.broadcast.emit('update map', student);

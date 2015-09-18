@@ -21,6 +21,7 @@ function handleQueryResponse(response){
 	}
 
     var student = {
+    	room: document.body.id,
     	sid: data.getValue(0,0),
     	firstName: data.getValue(0,1),
     	lastName: data.getValue(0,2),
