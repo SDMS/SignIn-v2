@@ -10,9 +10,9 @@ var db = new sqlite3.Database(file);
 db.serialize(function() {
         if(!exists){
                  console.log("Creating DB file");
-            db.run("CREATE TABLE sdms_maclab (id INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
-            db.run("CREATE TABLE sdms_lmc (id INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
-            db.run("CREATE TABLE whs_lmc (id INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
+            db.run("CREATE TABLE sdms_maclab (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
+            db.run("CREATE TABLE sdms_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
+            db.run("CREATE TABLE whs_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
              } else {
              console.log("DB already exists");
              }
@@ -23,7 +23,7 @@ db.serialize(function() {
 //db.close();
 
 module.exports.checkActive = function checkActive(room, sid, callback){
-	db.get('SELECT * FROM ' + room + ' WHERE id=?', sid, callback);
+	db.get('SELECT * FROM ' + room + ' WHERE sid=?', sid, callback);
 }
 module.exports.signInStudent = function signInStudent(room, student){
 	var date = new Date().toLocaleString();
@@ -34,7 +34,7 @@ module.exports.checkActiveComputer = function checkActiveComputer(room, computer
 	db.get('SELECT * FROM ' + room + ' WHERE computer=?', computer, callback);
 }
 module.exports.signOutStudent = function signOutStudent(room, student, callback) {
-	db.run('DELETE FROM ' + room + ' WHERE id=?', student.id); 
+	db.run('DELETE FROM ' + room + ' WHERE sid=?', student.sid); 
     callback(); //?
 }
 

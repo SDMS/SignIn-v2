@@ -6,7 +6,8 @@ function addStudent(data){
   	var list = document.getElementById('students');
 	var student = document.createElement('li');
 	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " " + data.grade + " " + data.team));
-	student.onclick = 'selectStudent(this)';
+	student.id = data.sid;
+	student.addEventListener("click", clickStudent);
 	list.appendChild(student);
 }
 
@@ -16,14 +17,22 @@ function removeStudent(data){
   list.removeChild(student);
 }
 
+function clickStudent(){
+  alert('click!');
+  if(selectedStudent == this.id) {
+  	deselectStudent(this);
+  } else {
+    selectStudent(this);
+  }
+}
+
 function selectStudent(element){
-  deselectStudent();
+  if(selectedStudent != -1) deselectStudent(selectedStudent);
   element.className = 'selected';
   selectedStudent = element.id;
 }
 
-function deselectStudent(){
-	var element = document.getElementById(selectedStudent);
+function deselectStudent(element){
 	element.className = '';
 	selectedStudent = -1;
 }
@@ -39,7 +48,7 @@ document.onkeydown = function(e) {
 
 function signin() {
 
-  var data = {room: document.body.id, id: document.getElementById('sid').value}
+  var data = {room: document.body.id, sid: document.getElementById('sid').value}
   socket.emit('start query', data);
 }
 
@@ -54,7 +63,7 @@ function signout(){
 }
 
 socket.on('do query', function(data){
-  getStudent(data.id, data.link);
+  getStudent(data.sid, data.link);
 });
 
 socket.on('update map', function(student){
