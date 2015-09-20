@@ -1,4 +1,5 @@
 google.load('visualization', 1.0);
+google.load("jquery", "1.7.1");
 
 function test() {
 	var opts = {sendMethod: 'auto'};

@@ -94,6 +94,9 @@ socket.on('sign in fail', function(err){
 });
 
 socket.on('sign out success', function(data){
+  // send data to google form
+  console.log(data);
+  postToGoogle(data);
 	// change computer to empty
 	removeStudent(data);
 });
@@ -102,3 +105,33 @@ socket.on('sign out fail', function(err){
 	alert('error: ' + err);
 	deselectStudent();
 });
+
+function postToGoogle(data){
+  var formUrl = data.formData["form"];
+  /* make this better please*/
+  var object = {};
+  object[data.formData.fields.sid] = data.sid;
+  object[data.formData.fields.firstName] = data.firstName;
+  object[data.formData.fields.lastName] = data.lastName;
+  object[data.formData.fields.grade] = data.grade;
+  object[data.formData.fields.timeIn] = data.timeIn;
+  object[data.formData.fields.team] = data.team;
+  object[data.formData.fields.computer] = data.computer;
+  object[data.formData.fields.fields] = data.fields;
+
+  $.ajax({
+    url: formUrl,
+    data: object,
+    type: "POST",
+    dataType: "xml",
+    statusCode: {
+      0: function() {
+        alert("Thank you.");
+      },
+      200: function() {
+        alert("Thank you.");
+      }
+    }
+
+  });
+}

@@ -60,16 +60,18 @@ io.on('connection', function(socket) {
 	
 	socket.on('sign out', function(student){
 		// check to make sure student isn't already signed out
-		db.checkActive(student.room, student.sid, function(err, row){
+		var room = student.room;
+		db.checkActive(room, student.sid, function(err, row){
 			if(row == undefined) { // student not signed in
 				console.log(err + " " + row);
 				socket.emit('sign out fail', 'student not signed in');
 				console.log('sign out fail: student not signed in' + "\n");
 			}
 			else {
-				// copy data from lab table, record time and destination and remove from lab table
-				db.signOutStudent(student.room, student, function(err, row){
-					console.log('signed out: ' + student.sid );
+				student = row;
+				student["formData"] = settings["rooms"][room];
+				db.signOutStudent(room, student, function(err, row){
+					console.log('signed out: ' + JSON.stringify(student));
 					socket.emit('sign out success', student);
 					student.action = 'sign out';
 					socket.broadcast.emit('update map', student);
