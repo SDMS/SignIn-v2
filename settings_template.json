@@ -1,0 +1,21 @@
+{
+  "links": {
+    "example": ""
+  },
+  "rooms":{
+    "example_room": {
+      "name": "example_room",
+      "form": "",
+      "fields": {
+        "timeIn": "",
+        "sid": "", 
+        "firstName": "", 
+        "lastName":"", 
+        "grade": "",
+        "team": "",
+        "device": "",
+        "fields": ""
+      }
+    }
+  }
+}
