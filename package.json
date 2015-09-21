@@ -1,6 +1,6 @@
 {
   "name": "SignIn",
-  "version": "0.0.2",
+  "version": "0.2",
   "description": "Replacement for old excel sign in database",
   "author": "Giselle Koo <gkoo@wethersfield.me>",
   "repository": {
