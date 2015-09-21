@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var request = require('request');
 
 var db = require('./db.js');
 var settings = require('./settings.json');
@@ -69,18 +70,42 @@ io.on('connection', function(socket) {
 			}
 			else {
 				student = row;
-				student["formData"] = settings["rooms"][room];
+				var formData = settings["rooms"][room];
+				postToGoogle(formData, student);
 				db.signOutStudent(room, student, function(err, row){
 					console.log('signed out: ' + JSON.stringify(student));
 					socket.emit('sign out success', student);
 					student.action = 'sign out';
 					socket.broadcast.emit('update map', student);
+
 				});
 			}
 		});
 	});
 
 });
+
+function postToGoogle(formData, student){
+  var f = ["sid", "firstName", "lastName", "grade", "timeIn", "team", "computer", "fields"];
+  var url = formData["form"] + "/formResponse?ifq";
+
+  for(var i = 0; i < f.length; i++) { 
+  	url += "&" + formData.fields[f[i]] + "=" + student[f[i]];
+  }
+  url += "&submit=Submit";
+
+  console.log(url);
+
+  request({
+    uri: url,
+    method: "GET",
+    timeout: 10000,
+    followRedirect: true,
+    maxRedirects: 10
+  }, function(error, response, body) {
+    console.log(body);
+  });
+}
 
 var server = http.listen(3000, function() {
 	var host = server.address().address;
