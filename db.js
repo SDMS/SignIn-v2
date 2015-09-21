@@ -10,9 +10,9 @@ var db = new sqlite3.Database(file);
 db.serialize(function() {
         if(!exists){
                  console.log("Creating DB file");
-            db.run("CREATE TABLE sdms_maclab (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
-            db.run("CREATE TABLE sdms_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
-            db.run("CREATE TABLE whs_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, computer INTEGER, fields TEXT)");
+            db.run("CREATE TABLE sdms_maclab (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
+            db.run("CREATE TABLE sdms_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
+            db.run("CREATE TABLE whs_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
              } else {
              console.log("DB already exists");
              }
@@ -28,10 +28,10 @@ module.exports.checkActive = function checkActive(room, sid, callback){
 module.exports.signInStudent = function signInStudent(room, student){
 	var date = new Date().toLocaleString();
 	console.log(date);
-	db.run('INSERT INTO ' + room + ' VALUES (?,?,?,?,?,?,?,?)', student.sid, student.firstName, student.lastName, student.grade, student.team, date, student.computer, student.fields);
+	db.run('INSERT INTO ' + room + ' VALUES (?,?,?,?,?,?,?,?)', student.sid, student.firstName, student.lastName, student.grade, student.team, date, student.device, student.fields);
 }
-module.exports.checkActiveComputer = function checkActiveComputer(room, computer, callback){
-	db.get('SELECT * FROM ' + room + ' WHERE computer=?', computer, callback);
+module.exports.checkActiveDevice = function checkActiveDevice(room, device, callback){
+	db.get('SELECT * FROM ' + room + ' WHERE device=?', device, callback);
 }
 module.exports.signOutStudent = function signOutStudent(room, student, callback) {
 	db.run('DELETE FROM ' + room + ' WHERE sid=?', student.sid); 

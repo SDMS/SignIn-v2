@@ -25,8 +25,8 @@ function handleQueryResponse(response){
     	sid: data.getValue(0,0),
     	firstName: data.getValue(0,1),
     	lastName: data.getValue(0,2),
-        grade: data.getValue(0,3),
-        team: data.getValue(0,4)
+      grade: data.getValue(0,3),
+      team: data.getValue(0,4)
 
     }
     console.log(student);

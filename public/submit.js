@@ -95,7 +95,6 @@ socket.on('sign in fail', function(err){
 
 socket.on('sign out success', function(data){
   console.log(data);
-	// change computer to empty
 	removeStudent(data);
 });
     

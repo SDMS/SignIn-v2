@@ -19,7 +19,7 @@ io.on('connection', function(socket) {
       db.getAllActive(room, function(err, row){
       	if(row){
       	  for(var i = 0; i < row.length; i++){
-      	    var student = {action: "sign in", sid: row[i].sid, computer: row[i].computer, firstName: row[i].firstName, lastName:row[i].lastName, team:row[i].team, grade:row[i].grade};
+      	    var student = {action: "sign in", sid: row[i].sid, device: row[i].device, firstName: row[i].firstName, lastName:row[i].lastName, team:row[i].team, grade:row[i].grade};
       	    socket.emit('update map', student);
       	  }
         }
@@ -86,7 +86,7 @@ io.on('connection', function(socket) {
 });
 
 function postToGoogle(formData, student){
-  var f = ["sid", "firstName", "lastName", "grade", "timeIn", "team", "computer", "fields"];
+  var f = ["sid", "firstName", "lastName", "grade", "timeIn", "team", "device", "fields"];
   var url = formData["form"] + "/formResponse?ifq";
 
   for(var i = 0; i < f.length; i++) { 
