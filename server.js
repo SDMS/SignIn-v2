@@ -70,6 +70,7 @@ io.on('connection', function(socket) {
 			}
 			else {
 				student = row;
+				console.log(room);
 				var formData = settings["rooms"][room];
 				postToGoogle(formData, student);
 				db.signOutStudent(room, student, function(err, row){
@@ -103,7 +104,7 @@ function postToGoogle(formData, student){
     followRedirect: true,
     maxRedirects: 10
   }, function(error, response, body) {
-    console.log(body);
+    console.log("posted to Google.");
   });
 }
 
