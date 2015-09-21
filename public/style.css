@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Muli);
+@import url(https://fonts.googleapis.com/css?family=Slabo+13px);
+
+body {
+  background-color: #d6cfc3;
+  margin: 0;
+  color: #2e2d36;
+  font-family:'Slabo 13px', serif;
+}
+
+#menu-buttons {
+  width: 100%;
+  height: 7vh;
+  background-color: #264159;
+}
+
+#menu-buttons button {
+  margin: 1vh 1vw;
+  height: 5vh;
+  background-color: #3c96ba;
+  border: 0;
+  font-size: 3vh;
+  font-family: 'Muli', sans-serif;
+
+}
+
+#menu-buttons button.active {
+  background-color: rgba(214, 207, 195, 0.5);
+}
+
+.menu {
+  background-color: rgba(214, 207, 195, 0.5);
+  padding-left: 1vw;
+  display: none;
+  float:right;
+  font-size: 3vh;
+}
+
+.menu.active {
+  display: block;
+}
+
+ul#students {
+  width:100%;
+  height: 93vh;
+  margin: 0;
+  padding: 0;
+  clear: right;
+  overflow-y: auto;
+  text-align: center;
+}
+ul#students li {
+  font-size: 3vmin;
+  list-style-type: none;
+  margin-right:auto;
+  margin-left: auto;
+  margin: 2vh auto;
+  padding: 1vh 1vw;
+  width: 75vmin;
+  background-color: #3c96ba;
+}
+
+ul#students li.selected {
+  background-color: #c0d65e;
+}

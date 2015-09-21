@@ -4,34 +4,34 @@
   <script src="/socket.io/socket.io.js"></script>
   <script type='text/javascript' src="./query.js"></script>
   <script type='text/javascript' src="./submit.js"></script>
+  <script type='text/javascript' src="./style.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body id='sdms_maclab'>
   <div id='menu-buttons'>
-    <button class='button in inactive' onclick='openIn()'>Sign In</button> 
+    <button class='button in active' id="toggle-in" onclick='toggleMenus()'>Sign In</button> 
       <!-- opens menu where student can type their id # 
       and input any other information that will be stored. -->
 
-    <button class='button out inactive' onclick='openOut()'>Sign Out</button>
+    <button class='button out' id="toggle-out" onclick='toggleMenus()'>Sign Out</button>
     <!-- prompts student to click on their name (li element)
     opens menu where student can input any other information 
     that will be stored. -->
-  </div>
-
-  <div class='menu in inactive'>
+  <div class='menu in active' id="in-menu">
     Student ID: <input id='sid' type='text'>
-    Computer #: <input id='num' type='number' min='1' max='31'>
     <button class='button in submit' onclick='signin()'>Submit</button>
   </div>
 
-  <div class='menu out inactive'>
+  <div class='menu out' id="out-menu">
     Select your name from the list below, then click Submit.
     <button class='button out submit' onclick='signout()'>Submit</button>
 
   </div>
+  </div>
+
+
 
   <ul id='students'>
-    <li id='123'> STUDENT INFORMATION GOES HERE </li>
-    <li id='456'> STUDENT INFORMATION GOES HERE </li>
   </ul>
 
 </body>

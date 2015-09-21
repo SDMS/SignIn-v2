@@ -5,7 +5,7 @@ var selectedStudent = -1;
 function addStudent(data){
   	var list = document.getElementById('students');
 	var student = document.createElement('li');
-	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " " + data.grade + " " + data.team));
+	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " | " + data.grade + "th " + data.team));
 	student.id = data.sid;
 	student.addEventListener("click", clickStudent);
 	list.appendChild(student);
