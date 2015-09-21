@@ -1,0 +1,38 @@
+<html>
+<head>
+  <script type='text/javascript' src="https://www.google.com/jsapi"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type='text/javascript' src="./query.js"></script>
+  <script type='text/javascript' src="./submit.js"></script>
+  <script type='text/javascript' src="./style.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body id='sdms_lmc'>
+  <div id='menu-buttons'>
+    <button class='button in active' id="toggle-in" onclick='toggleMenus()'>Sign In</button> 
+      <!-- opens menu where student can type their id # 
+      and input any other information that will be stored. -->
+
+    <button class='button out' id="toggle-out" onclick='toggleMenus()'>Sign Out</button>
+    <!-- prompts student to click on their name (li element)
+    opens menu where student can input any other information 
+    that will be stored. -->
+  <div class='menu in active' id="in-menu">
+    Student ID: <input id='sid' type='text'>
+    <button class='button in submit' onclick='signin()'>Submit</button>
+  </div>
+
+  <div class='menu out' id="out-menu">
+    Select your name from the list below, then click Submit.
+    <button class='button out submit' onclick='signout()'>Submit</button>
+
+  </div>
+  </div>
+
+
+
+  <ul id='students'>
+  </ul>
+
+</body>
+</html>

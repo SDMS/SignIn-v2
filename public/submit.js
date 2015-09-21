@@ -17,27 +17,6 @@ function removeStudent(data){
   list.removeChild(student);
 }
 
-function clickStudent(){
-  if(selectedStudent == this.id) {
-  	deselectStudent(this);
-  } else {
-    selectStudent(this);
-  }
-}
-
-function selectStudent(element){
-  if(selectedStudent != -1) {
-  	deselectStudent(document.getElementById(selectedStudent));
-  }
-  element.className = 'selected';
-  selectedStudent = element.id;
-}
-
-function deselectStudent(element){
-	element.className = '';
-	selectedStudent = -1;
-}
-
 document.onkeydown = function(e) {
 	if(typeof e == 'undefined' && window.event) {
 		e = window.event;
