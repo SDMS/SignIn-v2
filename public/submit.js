@@ -22,7 +22,8 @@ document.onkeydown = function(e) {
 		e = window.event;
 	}
 	if(e.keyCode == 13) {
-      //either sign in or sign out.
+      if(document.getElementById("in-menu").classList.contains("active")) signin();
+      else signout();
 	}
 }
 
