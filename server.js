@@ -10,6 +10,17 @@ var settings = require('./settings.json');
 
 app.use(express.static('public'));
 
+app.get('/', function (req, res){
+  var page = "<li>";
+  var rooms = settings.rooms;
+  for(var key in rooms){
+  	var rm = rooms[key];
+  	page += "<ul><a href='/" + rm.name + ".html'>" + rm.name + "</a></ul>";
+  }
+  page += "</li>";
+  res.send(page);
+});
+
 io.on('connection', function(socket) {
 	console.log('a user connected' + "\n");
       // update class map based on active user db
