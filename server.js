@@ -3,10 +3,10 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var request = require('request');
+var fs = require('fs');
 
 var db = require('./db.js');
 var settings = require('./settings.json');
-
 
 app.use(express.static('public'));
 
@@ -15,10 +15,25 @@ app.get('/', function (req, res){
   var rooms = settings.rooms;
   for(var key in rooms){
   	var rm = rooms[key];
-  	page += "<ul><a href='/" + rm.name + ".html'>" + rm.name + "</a></ul>";
+  	page += "<ul><a href='/" + rm.name + "'>" + rm.name + "</a></ul>";
   }
   page += "</li>";
   res.send(page);
+});
+
+app.engine('html', function(filePath, opts, callback){
+  fs.readFile(filePath, function(err, content) {
+  	if(err) return callback(new Error(err));
+
+  	var rendered = content.toString().replace('##TEMPLATE##', opts.url.replace('/', ''));
+    return callback(null, rendered);
+
+  });
+});
+
+app.get('/*', function (req, res) {
+  console.log(req.url);
+  res.render(__dirname + '/template.html', {url: req.url});
 });
 
 io.on('connection', function(socket) {
