@@ -23,7 +23,7 @@ body {
 #menu-buttons button {
   margin: 1vh 1vw;
   height: 5vh;
-  background-color: #3c96ba;
+  background-color: rgba(214, 207, 195, 0.5);
   border: 0;
   font-size: 3vh;
   font-family: 'Muli', sans-serif;
@@ -31,7 +31,7 @@ body {
 }
 
 #menu-buttons button.active {
-  background-color: rgba(214, 207, 195, 0.5);
+  background-color: #3c96ba;
 }
 
 .menu {
