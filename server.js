@@ -21,11 +21,18 @@ app.get('/', function (req, res){
   res.send(page);
 });
 
+function searchForPage(pageName){
+	var rooms = settings.rooms;
+	for(var key in rooms){
+    if(rooms[key].name == pageName) return true;
+	}
+	return false;
+}
+
 app.engine('html', function(filePath, opts, callback){
   fs.readFile(filePath, function(err, content) {
   	if(err) return callback(new Error(err));
-
-  	var rendered = content.toString().replace('##TEMPLATE##', opts.url.replace('/', ''));
+  	var rendered = content.toString().replace('##TEMPLATE##', opts.url);
     return callback(null, rendered);
 
   });
@@ -33,7 +40,9 @@ app.engine('html', function(filePath, opts, callback){
 
 app.get('/*', function (req, res) {
   console.log(req.url);
-  res.render(__dirname + '/template.html', {url: req.url});
+  var pageName = req.url.replace('/', '');
+  if(!searchForPage(pageName)) res.sendStatus(404);
+  else res.render(__dirname + '/template.html', {url: pageName});
 });
 
 io.on('connection', function(socket) {
