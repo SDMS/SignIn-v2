@@ -54,7 +54,7 @@ io.on('connection', function(socket) {
       db.getAllActive(room, function(err, row){
       	if(row){
       	  for(var i = 0; i < row.length; i++){
-      	    var student = {action: "sign in", sid: row[i].sid, device: row[i].device, firstName: row[i].firstName, lastName:row[i].lastName, team:row[i].team, grade:row[i].grade};
+      	    var student = {room: room, action: "sign in", sid: row[i].sid, device: row[i].device, firstName: row[i].firstName, lastName:row[i].lastName, team:row[i].team, grade:row[i].grade};
       	    socket.emit('update map', student);
       	  }
         }
