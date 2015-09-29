@@ -3,6 +3,7 @@ var socket = io.connect(null, {'reconnection limit': 3000, 'max reconnection att
 var selectedStudent = -1;
 
 function addStudent(data){
+        if(data.room!=document.body.id) return;
   	var list = document.getElementById('students');
 	var student = document.createElement('li');
 	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " | " + data.grade + "th " + data.team));
