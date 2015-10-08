@@ -6,14 +6,20 @@ function toggleMenus() {
   deselectStudent(document.getElementById(selectedStudent));
 }
 
+function showInstructions(){
+  showPopup("instructions");
+}
+
+function showPopup(name){
+  alert('show' + name);
+}
+
 function clickStudent(){
-  if(document.getElementById("toggle-out").classList.contains("active")){
-    if(selectedStudent == this.id) {
-     deselectStudent(this);
-    } else {
-      selectStudent(this);
-    }
-  } 
+  if(selectedStudent == this.id) {
+    deselectStudent(this);
+  } else {
+    selectStudent(this);
+  }
 }
 
 function selectStudent(element){
@@ -21,6 +27,14 @@ function selectStudent(element){
     deselectStudent(document.getElementById(selectedStudent));
   }
   element.classList.toggle("selected");
+
+  var button = document.createElement('button');
+  button.id = 'submit-out';
+  button.classList.add('button', 'out');
+  button.innerHTML = 'Sign Out';
+  button.onclick = signout;
+  element.parentNode.insertBefore(button, element.nextSibling);
+
   selectedStudent = element.id;
 }
 
@@ -28,5 +42,6 @@ function deselectStudent(element){
   if(element){
     element.classList.toggle("selected");
   }
+  document.getElementById('submit-out').remove();
   selectedStudent = -1;
 }

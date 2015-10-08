@@ -23,7 +23,7 @@ document.onkeydown = function(e) {
 		e = window.event;
 	}
 	if(e.keyCode == 13) {
-      if(document.getElementById("in-menu").classList.contains("active")) signin();
+      if(document.getElementById("sid").value != "") signin();
       else signout();
 	}
 }
