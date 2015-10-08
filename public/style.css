@@ -14,36 +14,31 @@ body {
   user-select: none;
 }
 
-#menu-buttons {
+#top-bar {
   width: 100%;
   height: 7vh;
   background-color: #264159;
 }
 
-#menu-buttons button {
+#top-bar button {
   margin: 1vh 1vw;
   height: 5vh;
-  background-color: rgba(214, 207, 195, 0.5);
+  background-color: #3c96ba;
   border: 0;
   font-size: 3vh;
   font-family: 'Muli', sans-serif;
 
 }
 
-#menu-buttons button.active {
-  background-color: #3c96ba;
+#top-bar button:hover {
+  background-color: #5cb6da;
 }
 
-.menu {
+.id-field {
   background-color: rgba(214, 207, 195, 0.5);
   padding-left: 1vw;
-  display: none;
   float:right;
   font-size: 3vh;
-}
-
-.menu.active {
-  display: block;
 }
 
 ul#students {

@@ -8,25 +8,21 @@
   <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body id='##TEMPLATE##'>
-  <div id='menu-buttons'>
-    <button class='button in active' id="toggle-in" onclick='toggleMenus()'>Sign In</button> 
-      <!-- opens menu where student can type their id # 
-      and input any other information that will be stored. -->
+  <div id='top-bar'>
+    <button class='button instructions' id="instructions" onclick="showInstructions()">Instructions</button>
 
-    <button class='button out' id="toggle-out" onclick='toggleMenus()'>Sign Out</button>
-    <!-- prompts student to click on their name (li element)
-    opens menu where student can input any other information 
-    that will be stored. -->
-  <div class='menu in active' id="in-menu">
-    Student ID: <input id='sid' pattern="[0-9]*" type='text'>
-    <button class='button in submit active' onclick='signin()'>Submit</button>
-  </div>
+    <!--<button class='button in active' id="toggle-in" onclick='toggleMenus()
 
-  <div class='menu out' id="out-menu">
-    Select your name from the list below, then click Submit.
-    <button class='button out submit active' onclick='signout()'>Submit</button>
+    <button class='button out' id="toggle-out" onclick='toggleMenus()'>Sign Out</button> -->
+    <div class='id-field' id="in-menu">
+      Student ID: <input id='sid' pattern="[0-9]*" type='text'>
+      <button class='button in submit active' onclick='signin()'>Submit</button>
+    </div>
 
-  </div>
+    <!--<div class='menu out' id="out-menu">
+      Select your name from the list below, then click Submit.
+      <button class='button out submit active' onclick='signout()'>Submit</button>
+    </div>-->
   </div>
 
 
