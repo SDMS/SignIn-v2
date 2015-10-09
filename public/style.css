@@ -37,7 +37,7 @@ button:hover {
 button#submit-out {
   position: relative;
   margin: 0;
-  bottom: -7vmin;
+  bottom: 0;
   left: 50vmin;
   height: auto;
   font-size: 3vmin;
@@ -82,4 +82,5 @@ ul#students li {
 
 ul#students li.selected {
   background-color: #c0d65e;
+  bottom: 7vmin;
 }
