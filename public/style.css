@@ -36,9 +36,20 @@ button:hover {
 
 button#submit-out {
   position: relative;
-  float:right;
   margin: 0;
-  bottom: 7vh;
+  bottom: -7vmin;
+  left: 50vmin;
+  height: auto;
+  font-size: 3vmin;
+}
+
+.instructions {
+  position: relative;
+  float: right;
+  font-size: 3vh;
+  color: #c0d65e;
+  background-color: #264159;
+  padding: 1vmin;
 }
 
 .id-field {

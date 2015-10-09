@@ -33,7 +33,7 @@ function selectStudent(element){
   button.classList.add('button', 'out');
   button.innerHTML = 'Sign Out';
   button.onclick = signout;
-  element.parentNode.insertBefore(button, element.nextSibling);
+  element.parentNode.insertBefore(button, element);
 
   selectedStudent = element.id;
 }
