@@ -35,11 +35,10 @@ button:hover {
 }
 
 button#submit-out {
-  position: relative;
+  position: absolute;
   margin: 0;
-  bottom: 0;
-  left: 50vmin;
-  height: auto;
+  right: -10vmin;
+  bottom: 1vmin;
   font-size: 3vmin;
 }
 
@@ -82,5 +81,4 @@ ul#students li {
 
 ul#students li.selected {
   background-color: #c0d65e;
-  bottom: 7vmin;
 }
