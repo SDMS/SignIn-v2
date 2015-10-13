@@ -35,7 +35,7 @@ function selectStudent(element){
   button.innerHTML = 'Sign Out';
   button.onclick = signout;
   element.appendChild(button);
-//  element.parentNode.insertBefore(button, element);
+  document.getElementById('submit-in').classList.toggle('grey');
 
   selectedStudent = element.id;
 }
@@ -46,6 +46,7 @@ function deselectStudent(element){
     element.classList.toggle("selected");
   }
   document.getElementById('submit-out').remove();
+  document.getElementById('submit-in').classList.toggle('grey');
   selectedStudent = -1;
   console.log("deselected student " + selectedStudent);
 }

@@ -11,7 +11,7 @@
   <div id='top-bar'>
 
     <div class='id-field' id="in-menu">
-      Student ID: <input id='sid' pattern="[0-9]*" type='text'>
+      Student ID: <input id='sid' pattern="[0-9]*" type='text' autofocus onBlur='this.focus()'>
       <button class='button in' id='submit-in' onclick='signin()'>Submit</button>     
     </div>
 

@@ -24,7 +24,10 @@ button {
   margin: 1vh 1vw;
   height: 5vh;
   background-color: #3c96ba;
-  border: 0;
+  border: 1px solid #fff;
+  -moz-box-shadow: inset 0 0 10px #fff;
+  -webkit-box-shadow: inset 0 0 10px #fff;
+  box-shadow: inset 0px 0px 10px #fff;
   font-size: 3vh;
   font-family: 'Muli', sans-serif;
 
@@ -32,6 +35,13 @@ button {
 
 button:hover {
   background-color: #5cb6da;
+}
+
+button.grey {
+  border: 1px solid #777;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 button#submit-out {
