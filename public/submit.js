@@ -24,7 +24,7 @@ document.onkeydown = function(e) {
 	}
 	if(e.keyCode == 13) {
       if(document.getElementById("sid").value != "") signin();
-      else signout();
+      else { signout(); selectedStudent = -1; }
 	}
 }
 
