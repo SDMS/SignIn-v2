@@ -48,7 +48,9 @@ app.get('/*', function (req, res) {
 io.on('connection', function(socket) {
 	console.log('a user connected' + "\n");
       // update class map based on active user db
-
+  socket.on('ping', function() {
+  	socket.emit('ping-back');
+  });
     socket.on('update map', function(room){
     	console.log('updating map... ' + room);
       db.getAllActive(room, function(err, row){

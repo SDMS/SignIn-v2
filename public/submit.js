@@ -48,6 +48,10 @@ function signout(){
   }
 }
 
+socket.on('ping-back', function() {
+  alert('ping');
+});
+
 socket.on('do query', function(data){
   getStudent(data.sid, data.link);
 });

@@ -52,6 +52,19 @@ button#submit-out {
   font-size: 3vmin;
 }
 
+
+.debug {
+  position: fixed;
+  bottom: 0;
+  height: 5px;
+  width: 5px;
+  overflow: hidden;
+}
+.debug-2 {
+  right: 0;
+}
+
+
 .instructions {
   position: relative;
   float: right;
