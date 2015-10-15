@@ -4,21 +4,21 @@ var exists = fs.existsSync(file);
 
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(file);
-
+var settings = require('./settings.json');
 
 
 db.serialize(function() {
         if(!exists){
-                 console.log("Creating DB file");
-            db.run("CREATE TABLE sdms_maclab (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
-            db.run("CREATE TABLE sdms_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
-            db.run("CREATE TABLE whs_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
-            db.run("CREATE TABLE sdms_dance (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
-
+            console.log("Creating DB file");
              } else {
-             console.log("DB already exists");
-             }
-
+             console.log("DB already exists. Checking for updates...");
+        }
+        var rooms = settings.rooms;
+            for(var key in rooms){
+                var rm = rooms[key];
+                db.run("CREATE TABLE IF NOT EXISTS " + rm.name + "(sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
+                console.log(rm.name);
+            }
 });
 
 
