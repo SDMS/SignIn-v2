@@ -13,6 +13,8 @@ db.serialize(function() {
             db.run("CREATE TABLE sdms_maclab (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
             db.run("CREATE TABLE sdms_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
             db.run("CREATE TABLE whs_lmc (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
+            db.run("CREATE TABLE sdms_dance (sid INTEGER, firstName TEXT, lastName TEXT, grade INTEGER, team TEXT, timeIn TEXT, device INTEGER, fields TEXT)");
+
              } else {
              console.log("DB already exists");
              }

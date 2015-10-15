@@ -6,6 +6,7 @@
     "example_room": {
       "name": "example_room",
       "form": "",
+      "mode": "",
       "fields": {
         "timeIn": "",
         "sid": "", 

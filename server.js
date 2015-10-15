@@ -33,6 +33,11 @@ app.engine('html', function(filePath, opts, callback){
   fs.readFile(filePath, function(err, content) {
   	if(err) return callback(new Error(err));
   	var rendered = content.toString().replace('##TEMPLATE##', opts.url);
+  	if(settings["rooms"][opts.url].mode == "check-in") {
+  		rendered = rendered.replace('##MODE##', "./check-in.js");
+
+  	}
+  	else rendered = rendered.replace("##MODE##", "");
     return callback(null, rendered);
 
   });
