@@ -23,7 +23,7 @@ document.onkeydown = function(e) {
 		e = window.event;
 	}
 	if(e.keyCode == 13) {
-      if(document.getElementById("sid").value != "") signin();
+      if(document.getElementById("sid").value != "")  document.getElementById('submit-in').click();
       else { signout(); selectedStudent = -1; }
 	}
 }

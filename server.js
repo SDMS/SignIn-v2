@@ -36,6 +36,8 @@ app.engine('html', function(filePath, opts, callback){
   	if(settings["rooms"][opts.url].mode == "check-in") {
   		rendered = rendered.replace('##MODE##', "./check-in.js");
 
+  	}else if(settings["rooms"][opts.url].mode == "check-sheet"){
+			rendered = rendered.replace('##MODE##', "./check-sheet.js");  		
   	}
   	else rendered = rendered.replace("##MODE##", "");
     return callback(null, rendered);
@@ -78,6 +80,12 @@ io.on('connection', function(socket) {
 		console.log(data);
 		socket.emit('do query', data);
 	});
+
+	socket.on('start ticket query', function(data){
+		var room = data.room;
+		data["link"] = settings["rooms"][room].form;
+		socket.emit('do ticket query', data);
+	})
 	
 	socket.on('sign in', function(student){
 		console.log("received data:");
