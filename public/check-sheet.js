@@ -21,28 +21,16 @@ socket.on('do ticket query', function(data){
 }); 
 
 function showTicketStatus(response){
-  console.log('lkdsjflksjf');
   if(response.isError()){
     console.log('Error: ' + response.getMessage() + ' ' + response.getDetailedMessage());
     return;
   }
   var data = response.getDataTable();
   if(data.getNumberOfRows() >= 1) {
-    alert("Student has ticket.");
+    alert("Student has ticket. \n" + data.getValue(0, 3) + " " + data.getValue(0, 4) + " \nTeam: " + data.getValue(0, 6));
     return;
   }else if(data.getNumberOfRows() < 1){
     alert("Student does not have ticket.");
     return;
   }
-
-    var student = {
-      room: document.body.id,
-      sid: data.getValue(0,0),
-      firstName: data.getValue(0,1),
-      lastName: data.getValue(0,2),
-      grade: data.getValue(0,3),
-      team: data.getValue(0,4)
-
-    }
-    console.log(student);
 }
