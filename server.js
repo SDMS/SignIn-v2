@@ -83,7 +83,8 @@ io.on('connection', function(socket) {
 
 	socket.on('start ticket query', function(data){
 		var room = data.room;
-		data["link"] = settings["rooms"][room].form;
+		room = room.slice(0,room.indexOf("_"));
+		data["link"] = settings["links"][room];
 		socket.emit('do ticket query', data);
 	})
 	

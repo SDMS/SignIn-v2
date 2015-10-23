@@ -14,9 +14,11 @@ function handleQueryResponse(response){
 	var data = response.getDataTable();
 	if(data.getNumberOfRows() > 1) {
 		alert("Please ask a teacher for help.");
+    document.getElementById("sid").value = "";
 		return;
 	}else if(data.getNumberOfRows() < 1){
 		alert("Did you type your ID in correctly?");
+    document.getElementById("sid").value = "";
 		return;
 	}
 
