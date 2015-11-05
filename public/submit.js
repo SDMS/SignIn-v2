@@ -1,10 +1,9 @@
-var socket = io.connect(null, {'reconnection limit': 3000, 'max reconnection attempts': Number.MAX_VALUE, 'connect timeout':7000});
+var socket = io.connect();
 
 var selectedStudent = -1;
 
 function addStudent(data){
-        if(data.room!=document.body.id) return;
-  	var list = document.getElementById('students');
+  var list = document.getElementById('students');
 	var student = document.createElement('li');
 	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " | " + data.grade + "th " + data.team));
 	student.id = data.sid;
@@ -66,7 +65,7 @@ socket.on('update map', function(student){
 		
 });
 
-window.onload = function() { socket.emit('update map', document.body.id); }
+window.onload = function() { socket.emit('setup', document.body.id); }
 
 socket.on('sign in success', function(data){
   console.log('signing in.... ' + JSON.stringify(data));
