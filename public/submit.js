@@ -51,6 +51,14 @@ socket.on('ping-back', function() {
   alert('ping');
 });
 
+socket.on('reconnect_failed', function(){
+  alert('reconnect failed. please refresh the page.');
+});
+
+socket.on('reconnect_error', function(err){
+  alert('there was a connection error. Please refresh the page.\n' + err);
+});
+
 socket.on('do query', function(data){
   getStudent(data.sid, data.link);
 });
