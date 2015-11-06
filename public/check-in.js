@@ -3,5 +3,5 @@ socket.on('sign in success', function(data){
 });
 document.addEventListener("DOMContentLoaded", function(event) { 
   //do work
-  document.getElementById('in-instructions').innerHTML = "Scan or type your Student ID to sign in.";
+  document.getElementById('in-instructions').innerHTML = "Scan or type your Student ID to register.";
 });
