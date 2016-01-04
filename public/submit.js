@@ -8,7 +8,7 @@ function addStudent(data){
 	student.appendChild(document.createTextNode(data.firstName + " " + data.lastName + " | " + data.grade + "th " + data.team));
 	student.id = data.sid;
 	student.addEventListener("click", clickStudent);
-	list.appendChild(student);
+	list.insertBefore(student, list.childNodes[0]);
 }
 
 function removeStudent(data){
