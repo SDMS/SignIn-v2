@@ -29,10 +29,10 @@ function handleQueryResponse(response){
     	lastName: data.getValue(0,2),
       grade: data.getValue(0,3),
       team: data.getValue(0,4)
-
-    }
+  }
+    
     console.log(student);
-	socket.emit('sign in', student);
+    socket.emit('sign in', student);
 }
 
 function getStudent(id, link){

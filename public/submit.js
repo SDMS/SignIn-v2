@@ -72,8 +72,22 @@ socket.on('update map', function(student){
 	}
 		
 });
-
-window.onload = function() { socket.emit('setup', document.body.id); }
+var time = new Date().getTime();
+function setLastMovement(e) {
+  time = new Date().getTime();
+}
+function refresh() {
+  if(new Date().getTime() - time >= 15*60000) 
+     window.location.reload(true);
+  else 
+     setTimeout(refresh, 5*60000);
+}
+window.onload = function() { 
+  socket.emit('setup', document.body.id); 
+  document.body.addEventListener("mousemove", setLastMovement);
+  document.body.addEventListener("keydown", setLastMovement);
+  setTimeout(refresh, 5*60000);
+}
 
 socket.on('sign in success', function(data){
   console.log('signing in.... ' + JSON.stringify(data));
